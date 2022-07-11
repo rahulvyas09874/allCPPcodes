@@ -1,0 +1,1056 @@
+
+
+
+imp things to remember
+
+//////////////////vvvvv impt things to remember///////////////////////
+1.if i am doing modulo of n with any number less than n then the modulo will always lies between [0,ceil(n/2)-1]
+
+2. for recursion the time complexity is given by: (total number of calls to the functon * work done in each call)
+
+3. for recusrion space complexity is given by: (max depth of the call stack*extra memory used in each stack frame)
+
+4. Top Down dp means coming from bigger to smaller part for solution (it's basically recursion + memoization)
+   whereas Bottom Up dp is building larger soutions using smaller ones (it's basically iterative in nature (like for loops and all))
+
+5.When the question talks about the minimum path or the number of minimum steps, it is a BFS(for graphs).
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+1.ATOI- use to convert and string/char array of int to an integer
+syntax int val=atoi(string/array of char)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+2. function to remove copy of an element in string of vectors
+   v.erase(remove(v.begin(), v.end(), name of string), v.end());
+where v is the name of vector.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+3. find(arr,arr+n,key)
+
+  this fn returns the address of the key in the array
+  to get the index of the key do: int index = address of the (key-arr) (where arr is the name of the array and arr is equal to the address of the 1st element of the array)
+  if index = n(the number of elements in the array) this means the key is not present in the given array.
+  else you will get the index.
+ complexity of find is of order O(n) because it's linear search only
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+4. BINARY SEARCH
+   
+   this function returns bool i.e true/false
+   syntax 
+   binary_search(arr,arr+n,key)
+
+   let us suppose the array is {1,2,3,4,5,6,7,8}
+   and i want to search index for 7
+   use lower_bound(arr,arr+n,7) this returns the address of 7 if 7 is present in the array else it will return the address of the number just greater than 7 in this case 8
+   index of 7 will be (lower_bound(arr,arr+n,7)-arr)
+   so lower_bound(arr,arr+n,7) gives address for no. >=key
+    
+   let us suppose the array is {1,2,3,4,5,6,7,7,7,8}
+   and we want to find the frequency of occurence of 7 in array
+   first use lower bound lower_bound(arr,arr+n,7) this will return the address of first 7 in the array
+   then use upper_bound(arr,arr+n,7) this will return the address of integer just greater than 7 in this case 8
+   therefore the frequency of occurence of 7 will be (upper_bound(arr,arr+n,7))-(lower_bound(arr,arr+n,7)) 
+   so upper_bound(arr,arr+n,7) gives address for no. >key
+   
+   procedure:
+   1st use the binar_search to look whether the required key is present in the array or not
+   the use lower_bound(arr,arr+n,7) to find the index.
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+5. SWAP function
+   syntax swap(a,b) the data types of both a and b should be same
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+6. ROTATE function
+   syntax rotate(arr,arr+x,arr+n)
+   where x is the index from which you wanna rotate the array.
+   e.g arr[]={1,2,3,4,5}
+   to roatate this from 3 i.e for the array to be {3,4,5,1,2}
+   we do rotate(arr,arr+2,arr+n) we can also do same for vector
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+7. NEXT_PERMUTATION function
+   syntax next_permutation(arr,arr+n)
+   for e.g if i m having an array arr[]={1,2,3}
+   the next permutation fn will give the next larger number to 123(as the elements are in the order 123)
+   next_permutation(arr,arr+n)
+   the array will become {1,3,2}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+5. fnts in strings
+
+   s.erase(index of first letter of the word, length of the word)
+   s.length(), returns the length of a string
+   s.find("string to be founded"), returns the index of 1st letter of the string
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+6. functions to get substrings of a string
+   for e.g if i m having an string s= "TODAY IS A RAINY DAY"
+   then i can get each part of the string separated by space using strtok()fn
+   syntax - strtok(s," ") or inplace of space i can also put any other character by which i want the substring from the string , s is the name of the string
+    this function returns a pointer on 1st iteration we will only get the 1st substring
+    implementation:
+    char *ptr = strtok(s, " ")
+    cout << ptr << endl;
+    the output will be TODAY
+    to get the other substrings we have to use NULL in place of s
+    implementation: while(ptr!=NULL){
+     
+     ptr=strtok(NULL, " ");
+     cout << ptr << endl;
+
+    }
+    if all substrings are printed then in last iteration it will print null thats why we are using this as an breaking condition for while loop
+
+
+6a. Another way of tokenising string is using sstream class
+
+
+   let the string be string path="my/name/is/rahul"
+   now in order to get each part which are separated by '/' we use the following syntax:
+
+
+   istringstream s(path);
+   string temp;
+   while(getline(s,temp,'/')){
+
+     cout << temp << endl;
+   }
+
+
+the output will be my
+                   name
+                   is
+                   rahul
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+7. FUNCTIONS IN VECTOR
+    V.PUSH_BACK()
+    V.POP_BACK()
+    V.INSERT(LOCATION WHERE TO INSERT,QUNATITY OF VALUE TO BE INSERTED,VALUE TO BE INSERTED) {e.g I AM HAVING A VECTOR WITH NAME V AND I WANT TO INSERT 4 100 After 3rd POSITION then v.insert(v.begin()+3,4,100)}
+     
+    to remove only 1 element v.erase(v.begin()+index)
+    to remove more than 1 element v.erase(v.begin()+starting index,v.begin()+ending index)
+    to remove all the elements use v.clear();
+    d.empty() use this to check whether a vector is empty or not
+
+ very imp...... *min_element(v.begin(),v.end())- returns the min. element in an vector
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ power function using bitmasking
+
+ long long calculate(int a,int b)
+{
+	// initialize ans with 1
+	long long ans = 1;
+	while(b>0)
+	{
+	// check if last bit 1	
+	  if(b&1){
+	     ans = (ans * a);
+	  }
+	  
+	// update value of a by a*a  
+	  a = a*a;
+	  
+	// right shift b by 1  
+	  b = b>>1;
+	}
+	
+	return ans;
+}    
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+seieve of primes (usually used for checking if a number is prime or not, and its pretty fast though)
+
+
+const int N =1e7+2; /// change N as per your convinience (n is the largest number upto which you wanna find prime)
+vector<bool> prime(N,true);
+void sieve(){
+	prime[0]=prime[1]=false;
+	int i,j;
+	for(int i=2;i*i<N;i++){
+		if (prime[i]){
+			for(j=i*i;j<=N;j+=i){
+				prime[j]=false;
+			}
+		}
+	}
+}
+
+
+this function will return a vector name prime in which each value is bool, so check if your number is prime or not;
+to execute this function use sieve(); in main function
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+DECLARING A 2D ARRAY USING DYNAMIC MEMORY WHICH CAN BE PASSED TO AN FUNCTION
+
+int n;
+    cin>>n;
+    int** arr=new int*[n];
+    for(int i=0;i<n;i++){
+        arr[i]=new int[n];
+        for(int j=0;j<n;j++){
+            arr[i][j]=0;
+        }
+    }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+REVERSE A LINKED LIST USING RECURSION
+
+node* reverseLink(node* head){
+    if(head==nullptr or head->next==nullptr){
+        return head;
+    }
+    node*temp= reverseLink(head->next);
+    head->next->next=head;
+    head->next=nullptr;
+    return temp;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+REVERSE A LINKED LIST USING ITERATION
+
+node* reverseUsingIteration(node* &head){
+    node*prev=nullptr;
+    node*current=head;
+    node*temp;
+    while(current!=nullptr){
+        temp=current->next;
+        current->next=prev;
+        prev=current;
+        current=temp;
+    }
+    head=prev;
+    return head;
+}
+
+
+/////////////////////////////////INSERT AT HEAD OF A LINKEDLIST//////////////////////////////////////////////
+void insertathead(node* &head,int data){
+    if(head== nullptr){
+        node*n=new node(data);
+        head=n;
+    }
+    else{
+        node*n=new node(data);
+        n->next=head;
+        head=n;
+    }
+}
+//////////////////////////////////PRINT A LINKED LIST////////////////////////////////////////////////////////
+void printlink(node*head){
+    while(head!=nullptr){
+        if(head->next==nullptr){
+            cout << head->data;
+        }
+        else{
+            cout << head->data << "-->";
+        }
+
+        head=head->next;
+    }
+    cout << endl;
+}
+///////////////reversing a linked list using recursion///////////////////////////////////
+node* reverseLink(node* head){
+    if(head==nullptr or head->next==nullptr){
+        return head;
+    }
+    node*temp= reverseLink(head->next);
+    head->next->next=head;
+    head->next=nullptr;
+    return temp;
+}
+////////////functon to rervese an linked list using iteration method//////////////////////
+node* reverseUsingIteration(node* head){
+    node*prev=nullptr;
+    node*current=head;
+    node*temp;
+    while(current!=nullptr){
+        temp=current->next;
+        current->next=prev;
+        prev=current;
+        current=temp;
+    }
+    head=prev;
+    return head;
+}
+///////////function to reverse nodes in k pairs//////////////////
+node* krec(node*head,int k){
+    if(head==nullptr){
+        return nullptr;
+    }
+
+    node*prev=nullptr;
+    node*current=head;
+    node*temp;
+    int count=0;
+    while(current!=nullptr and count<k){
+        temp=current->next;
+        current->next=prev;
+        prev=current;
+        current=temp;
+        count++;
+    }
+    if(temp!=nullptr){
+       head->next= krec(temp,k);
+
+    }
+    return prev;
+}
+
+////////////MERGE TWO SORTED LINKED LIST//////////////////////////////////////////////////
+node* merge(node*a,node*b){
+    if(a==nullptr){
+        return b;
+    }
+    if(b==nullptr){
+        return a;
+    }
+    node*c;
+    if(a->data<b->data){
+        c=a;
+        c->next=merge(a->next,b);
+    }
+    else{
+        c=b;
+        c->next=merge(a,b->next);
+    }
+
+    return c;
+}
+
+//////////////////////GET MID OF  A LINKED LIST(THE RUNNER TECHNIQUE)//////////////////////////////
+node*getMid(node *head){
+    int n=0;
+    node*temp=head;
+    while(true){
+        if(temp==nullptr or temp->next==nullptr){
+            break;
+        }
+        n++;
+        temp=temp->next->next;
+    }
+    if(temp==nullptr){
+        int rahul=1;
+        while(rahul<=n-1){
+            head=head->next;
+            rahul++;
+        }
+    }
+    else{
+        while(n--){
+            head=head->next;
+        }
+    }
+
+
+    return head;
+
+}
+////////////////////////GET KTH LAST NODE OF A LINKED LIST////////////////////////////////////////////
+node* getKlast(node*head, int k){
+    int n=0;
+    node*temp=head;
+    while(true){
+        if(temp==nullptr or temp->next==nullptr){
+            break;
+        }
+        n++;
+        temp=temp->next->next;
+    }
+    int numberofelem;
+   if(temp== nullptr){
+       numberofelem=2*n;
+   }
+   else{
+       numberofelem=(2*n)+1;
+   }
+    int lastfromstart= (numberofelem-k)+1;
+    int noob=0;
+    while(noob<lastfromstart-1){
+        head=head->next;
+        noob++;
+    }
+
+
+
+    return head;
+}
+
+
+///////////////////////////////MERGESORT ON LINKEDLIST/////////////////////////////////////////
+node* mergesortOnLinkedList(node*head){
+    if(head== nullptr or head->next==nullptr){
+        return head;
+    }
+    node*mid= getMid(head);
+    node*a=head;
+    node*b=mid->next;
+    mid->next= nullptr;
+
+    a= mergesortOnLinkedList(a);
+    b= mergesortOnLinkedList(b);
+    return merge(a,b);
+
+}
+/////////////////////////////////////////////////////////////////////////////trees///////////////////////////////////////////////////////////////////////////////////////////////////////////
+Depth First Traversals: 
+(a) Inorder (Left, Root, Right) 
+(b) Preorder (Root, Left, Right) 
+(c) Postorder (Left, Right, Root) 
+
+///////////////////////////////////NODE CLASS FOR BINARY TREE/////////////////////////////////////////////////////////////////////////////
+class node{
+public:
+    int data;
+    node*left=nullptr;
+    node*right=nullptr;
+
+    node(int d){
+        this->data=d;
+        this->left= nullptr;
+        this->right= nullptr;
+    }
+};
+///////////////////BOILER PLATE CODE FOR BUILDING A TREE////////////////////////////////////////////////////////////
+node*buildTree(){
+        ll int temp;
+        cin>>temp;
+
+        if(temp==-1){
+            return nullptr;
+        }
+        node*n=new node(temp);
+        n->left=buildTree();
+        n->right=buildTree();
+    return n;
+
+}
+//////////////////////////LEVEL ORDER TRAVERSAL IN BINARY TREE//////////////////////////////////////////////
+void levelOrderPrint(node*root){
+    queue<node*>q;
+    q.push(root);
+    q.push(nullptr);
+
+    while(!q.empty()){
+        node*temp=q.front();
+        if(temp== nullptr){
+            q.pop();
+            cout << endl;
+            if(!q.empty()){
+                q.push(nullptr);
+            }
+        }
+        else{
+            cout << temp->data << " ";
+            q.pop();
+            if(temp->left){
+                q.push(temp->left);
+            }
+            if(temp->right){
+                q.push(temp->right);
+            }
+        }
+    }
+
+
+return;
+
+}
+///////////////LEVEL ORDER BUILD/////////////////////////////////////////////////
+node*levelOrderBuild(){
+    int d;
+    cin>>d;
+    node*root=new node(d);
+    queue<node*>q;
+    q.push(root);
+    while(!q.empty()){
+        node*temp=q.front();
+        q.pop();
+        int a,b;
+        cin>>a>>b;
+        if(a!=-1){
+            temp->left=new node(a);
+            q.push(temp->left);
+        }
+        if(b!=-1){
+            temp->right=new node(b);
+            q.push(temp->right);
+        }
+    }
+    return root;
+}
+
+////////////////////////////////////DIAMETER OF A TREE//////////////////////////////////////////////
+////function to calculate height of a tree/////////////////
+int height(node*root){
+    if(root==nullptr){
+        return 0;
+    }
+    int h1= height(root->left);
+    int h2= height(root->right);
+    return 1+ max(h1,h2);
+}
+int diameter(node*root){
+    if(root==nullptr){
+        return 0;
+    }
+    int dleft= diameter(root->left);
+    int dright= diameter(root->right);
+    int h= height(root->left)+ height(root->right);
+    return max(h,max(dleft,dright));
+}
+//////////////////////////DIAMETER OF A TREE (OPTIMISED)/////////////////
+class hdpairs{
+public:
+    int height;
+    int diameter;
+
+};
+
+hdpairs diameterOptimised(node*root){
+    hdpairs temp;
+    if(root==nullptr){
+        temp.height=0;
+        temp.diameter=0;
+        return temp;
+    }
+    hdpairs left= diameterOptimised(root->left);
+    hdpairs right= diameterOptimised(root->right);
+    temp.height=max(left.height,right.height)+1;
+    temp.diameter=max((left.height+right.height),max(left.diameter,right.diameter));
+    return temp;
+
+}
+/////////////////////////////////DESCENDENT SUM (PREFIX SUM) IN BINARY TREES///////////////////////
+int descendentSum(node*root){
+    if(root== nullptr){
+        return 0;
+    }
+    if(root->left== nullptr and root->right == nullptr){
+        return root->data;
+    }
+    else{
+        int temp=root->data;
+        int left= descendentSum(root->left);
+        int right= descendentSum(root->right);
+
+        root->data=left+right;
+        return root->data+temp;
+    }
+
+
+}
+/////////////////////////////////////CHECK IF A TREE IS HEIGHT BALANCED OR NOT///////////////////////
+pair<int ,bool>HeightBalancedCheck(node*root){
+
+    pair<int,bool>temp,leftTree,rightTree;
+    if(root== nullptr){
+        temp.first=0;
+        temp.second=true;
+        return temp;
+    }
+    leftTree= HeightBalancedCheck(root->left);
+    rightTree= HeightBalancedCheck(root->right);
+    if(abs(leftTree.first-rightTree.first)<=1 and leftTree.second and rightTree.second){
+        return {max(leftTree.first,rightTree.first)+1,true};
+    }
+    else
+        return {max(leftTree.first,rightTree.first)+1, false};
+
+}
+
+////////////////////////////////////////max subset tree///////////////////////////////////////////////
+
+pair<int,int>MaxSubset(node*root){
+    pair<int ,int>temp,leftTree,rightTree;
+    if(root== nullptr){
+        temp.first=0;
+        temp.second=0;
+        return temp;
+    }
+    leftTree= MaxSubset(root->left);
+    rightTree= MaxSubset(root->right);
+    int inc=root->data+leftTree.second+rightTree.second;
+    int exc=max(leftTree.first,leftTree.second)+max(rightTree.first,rightTree.second);
+    return make_pair(inc,exc);
+}
+
+//////////////////////////PRINT NODES AT DISTANCE K FROM ROOT////////////////////////
+
+void printAtK(node*root, int k){
+    if(root== nullptr or k<0){
+        return;
+    }
+    if(k==0){
+        cout << root->data << " ";
+        return;
+    }
+    printAtK(root->left,k-1);
+    printAtK(root->right,k-1);
+
+}
+///////////////////////////PRINT ALL NODES AT A DISTANCE OF K FROM A TARGET NODE/////////////////////
+
+int PrintNodesAtDistanceK(node*root,node*target,int k){
+    if(root== nullptr){
+        return -1;
+    }
+
+    if(root==target){
+        printAtK(target,k);
+        return 0;
+    }
+
+    int dl= PrintNodesAtDistanceK(root->left,target,k);
+    if(dl!=-1){
+        if(dl+1==k){
+            cout << root->data << " ";
+        }
+        else{
+            printAtK(root->right,k-2-dl);
+
+        }
+        return dl+1;
+    }
+    int dr= PrintNodesAtDistanceK(root->right,target,k);
+    if(dr!=-1){
+        if(dr+1==k){
+            cout << root->data << " ";
+        }
+        else{
+            printAtK(root->left,k-2-dr);
+        }
+        return dr+1;
+    }
+    return -1;
+
+}
+/////////////////VERTICAL ORDER PRINT/////////////////////////////
+void verticalOrderPrintHelper(node*root,map<int,vector<int>>&m,int d){
+    if(root==nullptr){
+        return;
+    }
+    m[d].push_back(root->data);
+    verticalOrderPrintHelper(root->left,m,d-1);
+    verticalOrderPrintHelper(root->right,m,d+1);
+
+}
+
+void VerticalOrderPrint(node*root){
+    map<int,vector<int>>m;
+    int d=0;
+    verticalOrderPrintHelper(root,m,d);
+    for(auto p:m){
+        cout << "Vertical Level "<< p.first << ":";
+        for(auto l:p.second){
+            cout << l << " ";
+        }
+        cout << endl;
+    }
+}
+
+///////////////////LEFT VIEW PRINT //////////////////////////////////////////
+void leftViewPrint(node*root,int level,int *max_level){
+    if(root== nullptr){
+        return;
+    }
+    if(*max_level<level){
+        cout << root->data << " ";
+        *max_level=level;
+    }
+        leftViewPrint(root->left,level+1,max_level);
+        leftViewPrint(root->right,level+1,max_level);
+}
+
+//////////////////CHECK IF ONE TREE CAN BE CONVERTED TO ANOTHER BY SWAPPING THEIR SIBLINGS//////////////
+
+bool equal(node * root1, node * root2){
+    if(root1==root2){
+        return true;
+    }
+
+    return ((root1 and root2) and
+    (root1->data==root2->data)and
+    ((equal(root1->left,root2->left)and
+    equal(root1->right,root2->right))or((equal(root1->left,root2->right))and equal(root1->right,root2->left))));
+
+
+
+
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////BST IMPT FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////NODE CLASS/////////////////////////////////////////////////////////
+class node{
+public:
+    int data;
+    node*right;
+    node*left;
+
+    node(int key){
+        this->data=key;
+        this->left=nullptr;
+        this->right=nullptr;
+    }
+};
+///////////////////BUILDING BST////////////////////////////////////////////////////////////////////////////
+node*buildTree(node*root,int key){
+    if(root==nullptr){
+        return new node(key);
+    }
+    if(key<root->data){
+        root->left= buildTree(root->left,key);
+    }
+    else{
+        root->right= buildTree(root->right,key);
+    }
+    return root;
+}
+//////////////////////////////////INORDER TRAVERSAL(SORTED ORDER PRINT)////////////////////////////////////////
+void printTree(node*root){
+    if(root==nullptr){
+        return;
+    }
+    printTree(root->left);
+    cout << root->data << " ";
+    printTree(root->right);
+}
+
+///////////////////////////SEARCHING IN A BST(BOOL)//////////////////////////////////////////////////////////
+bool searchInBst(node*root,int key){
+
+    if(root== nullptr){
+        return false;
+    }
+    if(root->data==key){
+        return true;
+    }
+
+    if(key<root->data){
+        return searchInBst(root->left,key);
+    }
+    else{
+        return searchInBst(root->right,key);
+    }
+}
+
+////////////////////////SORTED ARRAY TO MIN. HEIGHT BST///////////////////////////////////////////////////////
+node* minHeightBst(vector<int>v,int start,int end){
+    if(end<start){
+        return nullptr;
+    }
+    int mid= (start+end)/2;
+    node*root=new node(v[mid]);
+    root->left= minHeightBst(v,start,mid-1);
+    root->right= minHeightBst(v,mid+1,end);
+    return root;
+
+}
+///////////////////////////////RETURN CLOSEST ELEMENT TO A GIVEN ELEMENT IN A  BST///////////////////
+
+int findClosest(node*root,int element, int closestdiff, int closest) {
+    if(root== nullptr){
+        return closest;
+    }
+    if(root->data==element){
+        return root->data;
+    }
+    int temp=abs(root->data-element);
+    if(temp<closestdiff){
+        closestdiff=temp;
+        closest=root->data;
+    }
+    if(root->data<element){
+        return findClosest(root->right,element,closestdiff,closest);
+    }
+    else{
+        return findClosest(root->left,element,closestdiff,closest);
+    }
+
+
+}
+
+/////////////////BST TO SORTED LINKED LIST//////////////////////////////////////
+
+class headtailpair{
+public:
+    node*head;
+    node*tail;
+};
+
+headtailpair bstToLinked(node*root){
+    headtailpair temp;
+    if(root== nullptr){
+        temp.head= nullptr;
+        temp.tail= nullptr;
+        return temp;
+    }
+    else if(root->left!=nullptr and root->right!= nullptr){
+        headtailpair forleft = bstToLinked(root->left);
+        headtailpair forright= bstToLinked(root->right);
+        forleft.tail->right=root;
+        root->right=forright.head;
+        temp.head=forleft.head;
+        temp.tail=forright.tail;
+        return temp;
+    }
+    else if(root->right== nullptr and root->left!=nullptr){
+        headtailpair forleft= bstToLinked(root->left);
+        forleft.tail->right=root;
+        //root->right= nullptr;
+        temp.head =forleft.head;
+        temp.tail=root;
+        return temp;
+
+    }
+    else if(root->left== nullptr and root->right!= nullptr){
+        headtailpair forright= bstToLinked(root->right);
+        root->right=forright.head;
+        temp.head=root;
+        temp.tail=forright.tail;
+        return temp;
+    }
+    else{
+        temp.head=root;
+        temp.tail=root;
+        return temp;
+    }
+}
+/////////////////////////INOREDER SUCCESSOR IN BST//////////////////////////////////////////////
+node* InOrderSucc(node*root, node*target){
+    if(target->right!= nullptr){
+        node* succ= nullptr;
+        node*temp=target->right;
+        while(temp!= nullptr){
+            succ=temp;
+            temp=temp->left;
+        }
+        return succ;
+    }
+    else{
+        node*temp=root;
+        node*succ= nullptr;
+        while(temp!=nullptr){
+            if(temp->data > target->data){
+                succ=temp;
+                temp=temp->left;
+            }
+            else if(temp->data < target->data){
+                temp=temp->right;
+            }
+            else{
+                break;
+            }
+        }
+        return succ;
+    }
+}
+
+////////////////////CHECK IF A GIVEN TREE IS BST OR NOT//////////////////////////////////
+bool isBST1(node*root,node*min,node*max) {
+
+    if (root == nullptr) {
+        return true;
+    }
+    if (min != nullptr and root->data <= min->data) {
+        return false;
+    }
+    if (max != nullptr and root->data >= max->data) {
+        return false;
+    }
+    bool left = isBST1(root->left, min, root);
+    bool right = isBST1(root->right, root, max);
+    return left and right;
+
+}
+
+bool isBST(node*root){
+    node*min=nullptr;
+    node*max=nullptr;
+    if(isBST1(root,min,max)){
+        return true;
+    }
+    else
+        return false;
+}
+
+
+
+///////////////////LOWEST COMMON ANCESTOR IN BST//////////////////////////////////
+node* lca(node*root,int a,int b){
+    if(root== nullptr){
+        return nullptr;
+    }
+   else if(root->data >a and root->data>b){
+       return lca(root->left,a,b);
+   }
+   else if(root->data<a and root->data<b){
+       return lca(root->right,a,b);
+   }
+   else
+       return root;
+}
+
+//////////////////////////SHORTEST PATH B/W TWO NODES IN A BST/////////////////////
+///helper function////
+int finddistance(node*root,int a){
+    node* temp=root;
+    int noob=0;
+    while (temp!= nullptr){
+        if(temp->data>a){
+            temp=temp->left;
+            noob++;
+        }
+        else if(temp->data<a){
+            temp=temp->right;
+            noob++;
+        }
+        else
+            break;
+    }
+    return noob;
+}
+
+int shortestDistance(node*root,int a ,int b){
+    if(root==nullptr){
+        return 0;
+    }
+    else if(root->data >a and root->data>b){
+        return shortestDistance(root->left,a,b);
+    }
+    else if(root->data<a and root->data<b){
+        return shortestDistance(root->right,a,b);
+    }
+    else{
+        int rahul= finddistance(root,a);
+        int rahul1= finddistance(root,b);
+        return rahul+rahul1;
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////trie/////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////node class of Trie/////////////////////////////////////////////////////////////////////////
+class node{
+public:
+    char data;
+    unordered_map<char,node*>m;
+    bool isTerminal;
+
+    node(char a){
+        this->data=a;
+        this->isTerminal=false;
+    }
+
+};
+////////////////////////////////// prefix Trie implementation////////////////////////////////////////////////////////
+class Trie{
+public:
+    node*root;
+
+    Trie(){
+        root= new node('\0');
+    }
+
+    void insert(string s){
+        node*temp = root;
+        for(auto ch:s){
+            if(temp->m.count(ch)==0){
+                node*n= new node(ch);
+                temp->m[ch]=n;
+            }
+            temp=temp->m[ch];
+
+        }
+        temp->isTerminal=true;
+
+    }
+
+    bool search(string s){
+        node*temp = root;
+        for(auto ch:s){
+            if(temp->m.count(ch)==0){
+                return false;
+            }
+            else{
+                temp=temp->m[ch];
+            }
+
+        }
+        return temp->isTerminal;
+
+
+    }
+
+
+
+
+
+};
+
+///////////////////////////////////////////////suffix Trie(just a bit different from prefix Trie)//////////////////////////////////////////////////////////////////////////////
+
+class SuffixTrie{
+public:
+    node*root;
+
+    SuffixTrie(){
+        root= new node('\0');
+    }
+
+    void insert_helper(string s){
+        node*temp = root;
+        for(auto ch:s){
+            if(temp->m.count(ch)==0){
+                node*n= new node(ch);
+                temp->m[ch]=n;
+            }
+            temp=temp->m[ch];
+
+        }
+        temp->isTerminal=true;
+
+    }
+
+    bool search_for_suffix(string s){
+        node*temp = root;
+        for(auto ch:s){
+            if(temp->m.count(ch)==0){
+                return false;
+            }
+            else{
+                temp=temp->m[ch];
+            }
+
+        }
+        return temp->isTerminal;
+
+
+    }
+
+    void insert_for_suffix(string s){
+        for(int i=0;i<s.length();i++){
+            insert_helper(s.substr(i));
+        }
+    }
+
+
+};
+
+
+
+
+
+   
+   
